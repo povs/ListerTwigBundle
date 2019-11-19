@@ -1,0 +1,173 @@
+{% block list_parent %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    <div {% if list_data['ajax'] %}class="js-povs-lister-ajax"{% endif %}>
+        <div>
+            {{ list_view(list, 'list_filter') }}
+        </div>
+        <div {% if list_data['ajax'] %}class="js-povs-lister-ajax-update"{% endif %}>
+            {{ list_view(list, 'list_table') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block list_table %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    {% if list.pager.total > 0 %}
+        <div>
+            {{ list_view(list, 'list_util') }}
+        </div>
+        <div>
+            {{ list_view(list, 'list_length_options') }}
+        </div>
+        <table>
+            {{ list_view(list, 'list_header') }}
+            {{ list_view(list, 'list_body') }}
+        </table>
+        <div>
+            {{ list_view(list, 'list_pagination') }}
+        </div>
+        <div>
+            {{ list_view(list, 'list_information') }}
+        </div>
+    {% else %}
+        {{ 'no_data'|trans({}, 'povs_lister') }}
+    {% endif %}
+{% endblock %}
+
+{% block list_header %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    <thead>
+        {% for field in list.headerRow.fields %}
+            {{ list_view(field, 'list_header_field') }}
+        {% endfor %}
+    </thead>
+{% endblock %}
+
+{% block list_header_field %}
+    {# @var list \Povs\ListerBundle\View\FieldView #}
+    <th>
+        {% if list.sortable %}
+            {% set sort = list.sort == constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_DESC')
+                ? constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_ASC')
+                : constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_DESC')
+            %}
+
+            <a href="{{ list.row.list.router.sortRoute(list.id, sort) }}">
+                {{ list.value }}
+                {% if list.sort == constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_DESC') %}
+                    &#9660;
+                {% elseif list.sort == constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_ASC') %}
+                    &#9650;
+                {% endif %}
+            </a>
+        {% else %}
+            {{ list.value }}
+        {% endif %}
+    </th>
+{% endblock %}
+
+{% block list_body %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    <tbody>
+        {% for row in list.bodyRows %}
+            {{ list_view(row, 'list_body_row') }}
+        {% endfor %}
+    </tbody>
+{% endblock %}
+
+{% block list_body_row %}
+    {# @var list \Povs\ListerBundle\View\RowView #}
+    <tr>
+        {% for field in list.fields %}
+            {{ list_view(field, 'list_body_field') }}
+        {% endfor %}
+    </tr>
+{% endblock %}
+
+{% block list_body_field %}
+    {# @var list \Povs\ListerBundle\View\FieldView #}
+    <td>
+        {% if list.value is iterable %}
+            {{ list.value|join(' ') }}
+        {% else %}
+            {{ list.value|raw }}
+        {% endif %}
+    </td>
+{% endblock %}
+
+{% block list_util %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+
+    {% for type in list_data['export_types'] %}
+        {% if list_data['export_limit'][type] is not defined or list.pager.total >= list_data['export_limit'][type] %}
+            <a href="{{ list.router.typeRoute(type) }}" class="js-povs-lister-ajax-ignore">
+                {{ type }}
+            </a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block list_length_options %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    {% for length in list_data['length_options'] %}
+        <a href="{{ list.router.lengthRoute(length) }}">
+            {{ length }}
+        </a>
+    {% endfor %}
+{% endblock %}
+
+{% block list_filter %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    {% if list_data['form_theme'] %}
+        {% form_theme list.filter list_data['theme']  %}
+    {% endif %}
+    {{ form_start(list.filter, {'action': list.router.route}) }}
+    {{ form_widget(list.filter) }}
+    {{ list_view(list, 'list_filter_list_data', false) }}
+    <button type="submit">{{ 'filter_action'|trans({}, 'povs_lister') }}</button>
+    <a href="{{ list.router.route }}" class="js-povs-lister-ajax-ignore">{{ 'clear_action'|trans({}, 'povs_lister') }}</a>
+    {{ form_end(list.filter) }}
+{% endblock %}
+
+{% block list_filter_list_data %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    <input type="hidden" name="{{ list.router.requestName('length') }}" value="{{ list.pager.length }}">
+    {% for fieldView in list.fieldViews %}
+        {% if fieldView.sortable %}
+            <input type="hidden"
+                   name="{{ list.router.requestName('sort') }}[{{ fieldView.id }}]"
+                   value="{{ fieldView.sort }}"
+            >
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block list_pagination %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    {% if list.pager.prevPage %}
+        <a href="{{ list.router.pageRoute(list.pager.prevPage) }}">{{ 'previous_page'|trans({}, 'povs_lister') }}</a>
+    {% endif %}
+
+    {% for pageData in list.pager.pages %}
+        {% if pageData.page %}
+            <a href="{{ list.router.pageRoute(pageData.page) }}" {% if pageData.active %}class="active"{% endif %}>
+                {{ pageData.page }}
+            </a>
+        {% else %}
+            &hellip;
+        {% endif %}
+    {% endfor %}
+
+    {% if list.pager.nextPage %}
+        <a href="{{ list.router.pageRoute(list.pager.nextPage) }}">{{ 'next_page'|trans({}, 'povs_lister') }}</a>
+    {% endif %}
+{% endblock %}
+
+{% block list_information %}
+    {# @var list \Povs\ListerBundle\View\ListView #}
+    {{ 'information'|trans({
+        '%from%': list.pager.firstResult,
+        '%to%': list.pager.lastResult,
+        '%total%': list.pager.total
+    }, 'povs_lister') }}
+{% endblock %}

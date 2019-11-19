@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+    <file id="povs_lister.en">
+        <unit id="information">
+            <segment>
+                 <source>information</source>
+                 <target>Showing %from% to %to% of %total% entries</target>
+            </segment>
+        </unit>
+        <unit id="previous_page">
+            <segment>
+                 <source>previous_page</source>
+                 <target>Previous</target>
+            </segment>
+        </unit>
+        <unit id="next_page">
+            <segment>
+                 <source>next_page</source>
+                 <target>Next</target>
+            </segment>
+        </unit>
+        <unit id="filter_action">
+            <segment>
+                 <source>filter_action</source>
+                 <target>Filter</target>
+            </segment>
+        </unit>
+        <unit id="clear_action">
+            <segment>
+                 <source>clear_action</source>
+                 <target>Clear</target>
+            </segment>
+        </unit>
+        <unit id="no_data">
+            <segment>
+                 <source>no_data</source>
+                 <target>The list is empty</target>
+            </segment>
+        </unit>
+    </file>
+</xliff>

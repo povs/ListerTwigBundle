@@ -1,0 +1,37 @@
+{
+  "name": "povs/lister-twig-bundle",
+  "type": "symfony-bundle",
+  "description": "Twig implementation for lister bundle. Provides Twig and Ajax list types for full stack web applications",
+  "keywords": ["lister", "list", "twig", "ajax", "symfony", "bundle"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Povilas Margaitis",
+      "homepage": "https://github.com/povs"
+    }
+  ],
+
+  "require": {
+    "php":                                "^7.1",
+    "symfony/twig-bundle":                "^3.4 || ^4.0"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^7",
+    "symfony/yaml": "^3.4 || ^4.0"
+  },
+
+  "autoload": {
+    "psr-4": {"Povs\\ListerTwigBundle\\": "src/"}
+  },
+
+  "autoload-dev": {
+    "psr-4": {"Povs\\ListerTwigBundle\\": "tests/"}
+  },
+
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

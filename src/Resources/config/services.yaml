@@ -1,0 +1,34 @@
+services:
+    Povs\ListerTwigBundle\Definition\ViewListerInterface:
+        alias: 'povs.view_lister'
+        public: true
+
+    povs.view_lister:
+        class: Povs\ListerTwigBundle\Service\ViewLister
+        public: true
+        arguments:
+            - '@.povs_lister.list_manager'
+
+    .povs_lister.twig.renderer:
+        class: Povs\ListerTwigBundle\Service\ListRenderer
+        arguments:
+            - '@twig'
+
+    .povs_lister.twig.extension.list:
+        class: Povs\ListerTwigBundle\Twig\Extension\ListExtension
+        tags: ['twig.extension']
+        arguments:
+            - '@.povs_lister.twig.renderer'
+
+    Povs\ListerTwigBundle\Type\ListType\TwigListType:
+        tags: ['povs_lister.list_type']
+        arguments:
+            - '@twig'
+            - '@.povs_lister.twig.renderer'
+
+    Povs\ListerTwigBundle\Type\ListType\AjaxListType:
+        tags: ['povs_lister.list_type']
+        arguments:
+            - '@twig'
+            - '@.povs_lister.twig.renderer'
+            - '@.povs_lister.request_handler'
