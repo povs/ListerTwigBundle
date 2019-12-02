@@ -119,7 +119,7 @@
 {% block list_filter %}
     {# @var list \Povs\ListerBundle\View\ListView #}
     {% if list_data['form_theme'] %}
-        {% form_theme list.filter list_data['theme']  %}
+        {% form_theme list.filter list_data['form_theme']  %}
     {% endif %}
     {{ form_start(list.filter, {'action': list.router.route}) }}
     {{ form_widget(list.filter) }}
