@@ -2,6 +2,7 @@
 namespace Povs\ListerTwigBundle\Type\ListType;
 
 use Povs\ListerBundle\Type\ListType\AbstractListType;
+use Povs\ListerTwigBundle\Service\ConfigurationResolver;
 use Povs\ListerTwigBundle\Service\ListRenderer;
 use Povs\ListerBundle\View\ListView;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,15 +25,22 @@ class TwigListType extends AbstractListType
     protected $renderer;
 
     /**
+     * @var ConfigurationResolver
+     */
+    private $configurationResolver;
+
+    /**
      * TwigResponse constructor.
      *
-     * @param Environment|null   $twig
-     * @param ListRenderer       $renderer
+     * @param Environment|null      $twig
+     * @param ListRenderer          $renderer
+     * @param ConfigurationResolver $configurationResolver
      */
-    public function __construct(Environment $twig, ListRenderer $renderer)
+    public function __construct(Environment $twig, ListRenderer $renderer, ConfigurationResolver $configurationResolver)
     {
         $this->twig = $twig;
         $this->renderer = $renderer;
+        $this->configurationResolver = $configurationResolver;
     }
 
     /**
@@ -137,6 +145,7 @@ class TwigListType extends AbstractListType
                 'length_options' => $this->config['length_options'],
                 'export_types' => $this->config['export_types'],
                 'export_limit' => $this->config['export_limit'],
+                'type_name' => $this->configurationResolver->getTypeName(),
                 'ajax' => false
             ]
         ], $options['context'] ?? []);

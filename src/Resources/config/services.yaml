@@ -8,6 +8,17 @@ services:
         public: true
         arguments:
             - '@.povs_lister.list_manager'
+            - '@.povs_lister.twig.type_resolver'
+
+    .povs_lister.twig.configuration_resolver:
+        class: Povs\ListerTwigBundle\Service\ConfigurationResolver
+        arguments: ~
+
+    .povs_lister.twig.type_resolver:
+        class: Povs\ListerTwigBundle\Service\TypeResolver
+        arguments:
+            - '@.povs_lister.request_handler'
+            - '@.povs_lister.twig.configuration_resolver'
 
     .povs_lister.twig.renderer:
         class: Povs\ListerTwigBundle\Service\ListRenderer
@@ -25,10 +36,12 @@ services:
         arguments:
             - '@twig'
             - '@.povs_lister.twig.renderer'
+            - '@.povs_lister.twig.configuration_resolver'
 
     Povs\ListerTwigBundle\Type\ListType\AjaxListType:
         tags: ['povs_lister.list_type']
         arguments:
             - '@twig'
             - '@.povs_lister.twig.renderer'
+            - '@.povs_lister.twig.configuration_resolver'
             - '@.povs_lister.request_handler'

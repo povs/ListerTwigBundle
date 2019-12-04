@@ -2,6 +2,7 @@
 namespace Povs\ListerTwigBundle\Type\ListType;
 
 use Povs\ListerBundle\Service\RequestHandler;
+use Povs\ListerTwigBundle\Service\ConfigurationResolver;
 use Povs\ListerTwigBundle\Service\ListRenderer;
 use Povs\ListerBundle\View\ListView;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,13 +24,18 @@ class AjaxListType extends TwigListType
     /**
      * AjaxListType constructor.
      *
-     * @param Environment    $twig
-     * @param ListRenderer   $renderer
-     * @param RequestHandler $requestHandler
+     * @param Environment           $twig
+     * @param ListRenderer          $renderer
+     * @param ConfigurationResolver $configurationResolver
+     * @param RequestHandler        $requestHandler
      */
-    public function __construct(Environment $twig, ListRenderer $renderer, RequestHandler $requestHandler)
-    {
-        parent::__construct($twig, $renderer);
+    public function __construct(
+        Environment $twig,
+        ListRenderer $renderer,
+        ConfigurationResolver $configurationResolver,
+        RequestHandler $requestHandler
+    ) {
+        parent::__construct($twig, $renderer, $configurationResolver);
         $this->requestHandler = $requestHandler;
     }
 

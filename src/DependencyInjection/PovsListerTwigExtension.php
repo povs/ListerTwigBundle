@@ -22,5 +22,7 @@ class PovsListerTwigExtension extends Extension
         );
 
         $loader->load('services.yaml');
+        $configResolverDef = $container->getDefinition('.povs_lister.twig.configuration_resolver');
+        $configResolverDef->setArgument(0, $configs);
     }
 }

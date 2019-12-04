@@ -5,6 +5,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Povs\ListerBundle\Service\RequestHandler;
 use Povs\ListerBundle\View\ListView;
+use Povs\ListerTwigBundle\Service\ConfigurationResolver;
 use Povs\ListerTwigBundle\Service\ListRenderer;
 use Povs\ListerTwigBundle\Type\ListType\AjaxListType;
 use Povs\ListerTwigBundle\Type\ListType\TwigListType;
@@ -21,6 +22,7 @@ class AjaxListTypeTest extends TestCase
 {
     private $twigMock;
     private $rendererMock;
+    private $configurationResolverMock;
     private $requestHandlerMock;
 
     public function setUp()
@@ -28,6 +30,7 @@ class AjaxListTypeTest extends TestCase
         $this->twigMock = $this->createMock(Environment::class);
         $this->rendererMock = $this->createMock(ListRenderer::class);
         $this->requestHandlerMock = $this->createMock(RequestHandler::class);
+        $this->configurationResolverMock = $this->createMock(ConfigurationResolver::class);
     }
 
     public function testGenerateResponseNotAjax(): void
@@ -111,6 +114,7 @@ class AjaxListTypeTest extends TestCase
             'length_options' => [20, 50, 100],
             'export_types' => ['test_type'],
             'export_limit' => 1000,
+            'type_name' => 'type',
             'block' => 'list_table'
         ];
         $listData = $config;
@@ -122,6 +126,9 @@ class AjaxListTypeTest extends TestCase
             'foo' => 'bar'
         ];
 
+        $this->configurationResolverMock->expects($this->once())
+            ->method('getTypeName')
+            ->willReturn('type');
         $this->requestHandlerMock->expects($this->exactly(2))
             ->method('getRequest')
             ->willReturn($requestMock);
@@ -155,7 +162,12 @@ class AjaxListTypeTest extends TestCase
      */
     private function getType(array $config = []): AjaxListType
     {
-        $type =  new AjaxListType($this->twigMock, $this->rendererMock, $this->requestHandlerMock);
+        $type =  new AjaxListType(
+            $this->twigMock,
+            $this->rendererMock,
+            $this->configurationResolverMock,
+            $this->requestHandlerMock
+        );
         $type->setConfig($config);
 
         return $type;

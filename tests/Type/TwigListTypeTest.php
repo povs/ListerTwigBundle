@@ -4,6 +4,7 @@ namespace Povs\ListerTwigBundle\Type;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Povs\ListerBundle\View\ListView;
+use Povs\ListerTwigBundle\Service\ConfigurationResolver;
 use Povs\ListerTwigBundle\Service\ListRenderer;
 use Povs\ListerTwigBundle\Type\ListType\TwigListType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +17,13 @@ class TwigListTypeTest extends TestCase
 {
     private $twigMock;
     private $rendererMock;
+    private $configurationResolverMock;
 
     public function setUp()
     {
         $this->twigMock = $this->createMock(Environment::class);
         $this->rendererMock = $this->createMock(ListRenderer::class);
+        $this->configurationResolverMock = $this->createMock(ConfigurationResolver::class);
     }
 
     /**
@@ -176,6 +179,7 @@ class TwigListTypeTest extends TestCase
             'form_theme' => 'testFormTheme',
             'length_options' => [20, 50, 100],
             'export_types' => ['test_type'],
+            'type_name' => 'type',
             'export_limit' => 1000
         ];
         $listData = $config;
@@ -187,6 +191,9 @@ class TwigListTypeTest extends TestCase
             'foo' => 'bar'
         ];
 
+        $this->configurationResolverMock->expects($this->once())
+            ->method('getTypeName')
+            ->willReturn('type');
         $this->rendererMock->expects($this->once())
             ->method('setListTemplate')
             ->with($template);
@@ -205,7 +212,7 @@ class TwigListTypeTest extends TestCase
      */
     private function getType(array $config = []): TwigListType
     {
-        $type =  new TwigListType($this->twigMock, $this->rendererMock);
+        $type =  new TwigListType($this->twigMock, $this->rendererMock, $this->configurationResolverMock);
         $type->setConfig($config);
 
         return $type;

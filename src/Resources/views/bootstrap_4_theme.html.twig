@@ -54,8 +54,8 @@
     {# @var list \Povs\ListerBundle\View\ListView #}
 
     {% for type in list_data['export_types'] %}
-        {% if list_data['export_limit'][type] is not defined or list.pager.total <= list_data['export_limit'][type] %}
-            <a href="{{ list.router.typeRoute(type) }}" class="btn btn-primary js-povs-lister-ajax-ignore">
+        {% if list_data['export_limit'][type] is not defined or list.pager.total >= list_data['export_limit'][type] %}
+            <a href="{{ list.router.generate({list_data['type_name']: type}) }}" class="js-povs-lister-ajax-ignore">
                 {{ type }}
             </a>
         {% endif %}
