@@ -37,5 +37,11 @@
                  <target>The list is empty</target>
             </segment>
         </unit>
+        <unit id="export_type.export">
+            <segment>
+                 <source>export_type.export</source>
+                 <target>Export</target>
+            </segment>
+        </unit>
     </file>
 </xliff>
