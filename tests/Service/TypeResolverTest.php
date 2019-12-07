@@ -24,7 +24,7 @@ class TypeResolverTest extends TestCase
     {
         $requestMock = $this->createMock(Request::class);
         $parametersMock = $this->createMock(ParameterBag::class);
-        $requestMock->request = $parametersMock;
+        $requestMock->query = $parametersMock;
         $this->requestHandler->expects($this->once())
             ->method('getRequest')
             ->willReturn($requestMock);
@@ -46,7 +46,7 @@ class TypeResolverTest extends TestCase
     {
         $requestMock = $this->createMock(Request::class);
         $parametersMock = $this->createMock(ParameterBag::class);
-        $requestMock->request = $parametersMock;
+        $requestMock->query = $parametersMock;
         $this->requestHandler->expects($this->once())
             ->method('getRequest')
             ->willReturn($requestMock);
