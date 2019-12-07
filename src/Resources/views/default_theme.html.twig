@@ -131,15 +131,17 @@
 
 {% block list_filter_list_data %}
     {# @var list \Povs\ListerBundle\View\ListView #}
-    <input type="hidden" name="{{ list.router.requestName('length') }}" value="{{ list.pager.length }}">
-    {% for fieldView in list.fieldViews %}
-        {% if fieldView.sortable %}
-            <input type="hidden"
-                   name="{{ list.router.requestName('sort') }}[{{ fieldView.id }}]"
-                   value="{{ fieldView.sort }}"
-            >
-        {% endif %}
-    {% endfor %}
+    <div {% if list_data['ajax'] %}class="js-povs-lister-ajax-list-data" data-fields="{{ list.router.requestName('length') }},{{ list.router.requestName('sort') }}"{% endif %}>
+        <input type="hidden" name="{{ list.router.requestName('length') }}" value="{{ list.pager.length }}">
+        {% for fieldView in list.fieldViews %}
+            {% if fieldView.sortable and fieldView.sort %}
+                <input type="hidden"
+                       name="{{ list.router.requestName('sort') }}[{{ fieldView.id }}]"
+                       value="{{ fieldView.sort }}"
+                >
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block list_pagination %}

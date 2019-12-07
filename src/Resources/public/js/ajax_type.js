@@ -2,6 +2,7 @@ povs_lister_ajax = {
     selectors: {
         ajaxLister: '.js-povs-lister-ajax',
         ignore: 'js-povs-lister-ajax-ignore',
+        listerData: '.js-povs-lister-ajax-list-data',
         dynamicContainer: '.js-povs-lister-ajax-update'
     },
 
@@ -99,18 +100,23 @@ povs_lister_ajax = {
     updateFilterForm: function(url, parentEl)
     {
         let searchParams = new URLSearchParams(url.substring(url.indexOf('?') + 1)),
-            form = parentEl.querySelector('form');
+            listerData = parentEl.querySelector(this.selectors.listerData),
+            fields = listerData.getAttribute('data-fields').split(',');
 
-        form.querySelectorAll('input[type="hidden"]').forEach(function(el) {
-            el.value = '';
-        });
+        listerData.innerHTML = '';
 
-        searchParams.forEach(function(value, key, parent) {
-            let el = form.querySelector('input[name="'+key+'"][type="hidden"]');
+        searchParams.forEach(function(value, key) {
+            let input = document.createElement('input'),
+                name = key.split('[')[0];
 
-            if (el) {
-                el.value = value;
+            if (!fields.includes(name)) {
+                return;
             }
+
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', key);
+            input.setAttribute('value', value);
+            listerData.appendChild(input);
         });
     }
 };
