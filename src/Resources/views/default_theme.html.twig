@@ -52,7 +52,7 @@
                 : constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_DESC')
             %}
 
-            <a href="{{ list.row.list.router.sortRoute(list.id, sort) }}">
+            <a href="{{ list.row.list.router.sortRoute(list.id, sort) }}" class="js-povs-lister-ajax-trigger">
                 {{ list.value }}
                 {% if list.sort == constant('Povs\\ListerBundle\\Mapper\\ListField::SORT_DESC') %}
                     &#9660;
@@ -99,7 +99,7 @@
     {# @var list \Povs\ListerBundle\View\ListView #}
     {% for type in list_data['export_types'] %}
         {% if list_data['export_limit'][type] is not defined or list.pager.total >= list_data['export_limit'][type] %}
-            <a href="{{ list.router.generate({(list_data['type_name']): type}) }}" class="js-povs-lister-ajax-ignore">
+            <a href="{{ list.router.generate({(list_data['type_name']): type}) }}">
                 {{ ('export_type.'~type)|trans([], 'povs_lister') }}
             </a>
         {% endif %}
@@ -109,7 +109,7 @@
 {% block list_length_options %}
     {# @var list \Povs\ListerBundle\View\ListView #}
     {% for length in list_data['length_options'] %}
-        <a href="{{ list.router.lengthRoute(length) }}">
+        <a href="{{ list.router.lengthRoute(length) }}" class="js-povs-lister-ajax-trigger">
             {{ length }}
         </a>
     {% endfor %}
@@ -124,7 +124,7 @@
     {{ form_widget(list.filter) }}
     {{ list_view(list, 'list_filter_list_data', false) }}
     <button type="submit">{{ 'filter_action'|trans({}, 'povs_lister') }}</button>
-    <a href="{{ list.router.route }}" class="js-povs-lister-ajax-ignore">{{ 'clear_action'|trans({}, 'povs_lister') }}</a>
+    <a href="{{ list.router.route }}">{{ 'clear_action'|trans({}, 'povs_lister') }}</a>
     {{ form_end(list.filter) }}
 {% endblock %}
 
@@ -146,12 +146,12 @@
 {% block list_pagination %}
     {# @var list \Povs\ListerBundle\View\ListView #}
     {% if list.pager.prevPage %}
-        <a href="{{ list.router.pageRoute(list.pager.prevPage) }}">{{ 'previous_page'|trans({}, 'povs_lister') }}</a>
+        <a href="{{ list.router.pageRoute(list.pager.prevPage) }}" class="js-povs-lister-ajax-trigger">{{ 'previous_page'|trans({}, 'povs_lister') }}</a>
     {% endif %}
 
     {% for pageData in list.pager.pages %}
         {% if pageData.page %}
-            <a href="{{ list.router.pageRoute(pageData.page) }}" {% if pageData.active %}class="active"{% endif %}>
+            <a href="{{ list.router.pageRoute(pageData.page) }}" class="js-povs-lister-ajax-trigger{% if pageData.active %} active{% endif %}">
                 {{ pageData.page }}
             </a>
         {% else %}
@@ -160,7 +160,7 @@
     {% endfor %}
 
     {% if list.pager.nextPage %}
-        <a href="{{ list.router.pageRoute(list.pager.nextPage) }}">{{ 'next_page'|trans({}, 'povs_lister') }}</a>
+        <a href="{{ list.router.pageRoute(list.pager.nextPage) }}" class="js-povs-lister-ajax-trigger">{{ 'next_page'|trans({}, 'povs_lister') }}</a>
     {% endif %}
 {% endblock %}
 

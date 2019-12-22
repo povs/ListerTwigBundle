@@ -1,7 +1,7 @@
-povs_lister_ajax = {
+ListerAjax = {
     selectors: {
         ajaxLister: '.js-povs-lister-ajax',
-        ignore: 'js-povs-lister-ajax-ignore',
+        trigger: '.js-povs-lister-ajax-trigger',
         listerData: '.js-povs-lister-ajax-list-data',
         dynamicContainer: '.js-povs-lister-ajax-update'
     },
@@ -12,14 +12,14 @@ povs_lister_ajax = {
     init: function()
     {
         let parentEl = document.querySelector(this.selectors.ajaxLister),
+            trigger = document.querySelectorAll(this.selectors.trigger),
             self = this;
 
-        parentEl.addEventListener('click', function(e) {
-            if (e.target.nodeName === 'A' && !e.target.classList.contains(self.selectors.ignore)) {
-                e.preventDefault();
+        for (let i = 0; i < trigger.length; i++) {
+            trigger[i].addEventListener('click', function(e) {
                 self.refreshTable(e.target.getAttribute('href'), parentEl, true, true);
-            }
-        });
+            });
+        }
 
         parentEl.addEventListener('submit', function(e) {
             e.preventDefault();

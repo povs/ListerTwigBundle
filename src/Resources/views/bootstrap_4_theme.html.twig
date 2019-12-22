@@ -43,7 +43,7 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lister-length">
             {% for length in list_data['length_options'] %}
                 {% if length != list.pager.length %}
-                    <a class="dropdown-item" href="{{ list.router.lengthRoute(length) }}">{{ length }}</a>
+                    <a class="dropdown-item js-povs-lister-ajax-trigger" href="{{ list.router.lengthRoute(length) }}">{{ length }}</a>
                 {% endif %}
             {% endfor %}
         </div>
@@ -54,7 +54,7 @@
     {# @var list \Povs\ListerBundle\View\ListView #}
     {% for type in list_data['export_types'] %}
         {% if list_data['export_limit'][type] is not defined or list.pager.total >= list_data['export_limit'][type] %}
-            <a href="{{ list.router.generate({(list_data['type_name']): type}) }}" class="btn btn-primary js-povs-lister-ajax-ignore">
+            <a href="{{ list.router.generate({(list_data['type_name']): type}) }}" class="btn btn-primary">
                 {{ ('export_type.'~type)|trans([], 'povs_lister') }}
             </a>
         {% endif %}
@@ -66,14 +66,14 @@
     <ul class="pagination justify-content-center justify-content-md-start">
         {% if list.pager.prevPage %}
             <li class="page-item">
-                <a class="page-link" href="{{ list.router.pageRoute(list.pager.prevPage) }}" aria-label="{{ 'previous_page'|trans({}, 'povs_lister') }}">
+                <a class="page-link" href="{{ list.router.pageRoute(list.pager.prevPage) }}" aria-label="{{ 'previous_page'|trans({}, 'povs_lister') }}" class="js-povs-lister-ajax-trigger">
                     {{ 'previous_page'|trans({}, 'povs_lister') }}
                 </a>
             </li>
         {% endif %}
         {% for pageData in list.pager.pages %}
             {% if pageData.page %}
-                <li class="page-item {% if pageData.active %}active{% endif %}">
+                <li class="page-item js-povs-lister-ajax-trigger{% if pageData.active %} active{% endif %}">
                     <a class="page-link" href="{{ list.router.pageRoute(pageData.page) }}">{{ pageData.page }}</a>
                 </li>
             {% else %}
@@ -84,7 +84,7 @@
         {% endfor %}
         {% if list.pager.nextPage %}
             <li class="page-item">
-                <a class="page-link" href="{{ list.router.pageRoute(list.pager.nextPage) }}" aria-label="{{ 'next_page'|trans({}, 'povs_lister') }}">
+                <a class="page-link" href="{{ list.router.pageRoute(list.pager.nextPage) }}" aria-label="{{ 'next_page'|trans({}, 'povs_lister') }}" class="js-povs-lister-ajax-trigger">
                     {{ 'next_page'|trans({}, 'povs_lister') }}
                 </a>
             </li>
@@ -101,6 +101,6 @@
     {{ form_widget(list.filter) }}
     {{ list_view(list, 'list_filter_list_data', false) }}
     <button class="btn btn-success" type="submit">{{ 'filter_action'|trans({}, 'povs_lister') }}</button>
-    <a class="btn btn-light js-povs-lister-ajax-ignore" href="{{ list.router.route }}">{{ 'clear_action'|trans({}, 'povs_lister') }}</a>
+    <a class="btn btn-light" href="{{ list.router.route }}">{{ 'clear_action'|trans({}, 'povs_lister') }}</a>
     {{ form_end(list.filter) }}
 {% endblock %}
