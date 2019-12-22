@@ -73,8 +73,8 @@
         {% endif %}
         {% for pageData in list.pager.pages %}
             {% if pageData.page %}
-                <li class="page-item js-povs-lister-ajax-trigger{% if pageData.active %} active{% endif %}">
-                    <a class="page-link" href="{{ list.router.pageRoute(pageData.page) }}">{{ pageData.page }}</a>
+                <li class="page-item {% if pageData.active %} active{% endif %}">
+                    <a class="page-link js-povs-lister-ajax-trigger" href="{{ list.router.pageRoute(pageData.page) }}">{{ pageData.page }}</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
