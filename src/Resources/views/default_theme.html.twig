@@ -87,11 +87,7 @@
 {% block list_body_field %}
     {# @var list \Povs\ListerBundle\View\FieldView #}
     <td>
-        {% if list.value is iterable %}
-            {{ list.value|join(' ') }}
-        {% else %}
-            {{ list.value|raw }}
-        {% endif %}
+        {{ list.value|raw }}
     </td>
 {% endblock %}
 
