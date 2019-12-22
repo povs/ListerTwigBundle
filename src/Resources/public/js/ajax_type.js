@@ -5,6 +5,7 @@ ListerAjax = {
         listerData: '.js-povs-lister-ajax-list-data',
         dynamicContainer: '.js-povs-lister-ajax-update'
     },
+    loading: false,
 
     /**
      * Initiates lister ajax type
@@ -17,6 +18,7 @@ ListerAjax = {
 
         for (let i = 0; i < trigger.length; i++) {
             trigger[i].addEventListener('click', function(e) {
+                e.preventDefault();
                 self.refreshTable(e.target.getAttribute('href'), parentEl, true, true);
             });
         }
@@ -43,6 +45,11 @@ ListerAjax = {
      */
     refreshTable: function(url, parentEl, pushState, updateFilterForm)
     {
+        if (this.loading) {
+            return;
+        }
+
+        this.loading = true;
         this.triggerEvent('povs_lister_ajax_pre_update', parentEl);
         let request = new XMLHttpRequest(),
             self = this;
@@ -61,17 +68,20 @@ ListerAjax = {
                     self.updateFilterForm(url, parentEl)
                 }
 
+                self.loading = false;
                 self.triggerEvent(
                     'povs_lister_ajax_post_update',
                     parentEl,
                     {response: this.response, url: url}
                 );
             } else {
+                self.loading = false;
                 self.triggerEvent('povs_lister_ajax_error', parentEl);
             }
         };
 
         request.onerror = function() {
+            self.loading = false;
             self.triggerEvent('povs_lister_ajax_error', parentEl);
         };
 
