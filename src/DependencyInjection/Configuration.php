@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('povs_lister_twig');
-        $rootNode = $treeBuilder->root('povs_lister_twig');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode->children()
             ->arrayNode('view_types')

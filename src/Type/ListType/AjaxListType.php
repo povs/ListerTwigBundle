@@ -8,7 +8,6 @@ use Povs\ListerBundle\View\ListView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Throwable;
 use Twig\Environment;
 
 /**
