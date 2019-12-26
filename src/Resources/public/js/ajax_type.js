@@ -15,6 +15,10 @@ ListerAjax = {
         let parentEl = document.querySelector(this.selectors.ajaxLister),
             self = this;
 
+        if (parentEl.length === 0) {
+            return;
+        }
+
         parentEl.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains(self.selectors.trigger)) {
                 e.preventDefault();
