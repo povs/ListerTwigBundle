@@ -66,7 +66,7 @@
     <ul class="pagination justify-content-center justify-content-md-start">
         {% if list.pager.prevPage %}
             <li class="page-item">
-                <a class="page-link" href="{{ list.router.pageRoute(list.pager.prevPage) }}" aria-label="{{ 'previous_page'|trans({}, 'povs_lister') }}" class="js-povs-lister-ajax-trigger">
+                <a class="page-link js-povs-lister-ajax-trigger" href="{{ list.router.pageRoute(list.pager.prevPage) }}" aria-label="{{ 'previous_page'|trans({}, 'povs_lister') }}">
                     {{ 'previous_page'|trans({}, 'povs_lister') }}
                 </a>
             </li>
@@ -84,7 +84,7 @@
         {% endfor %}
         {% if list.pager.nextPage %}
             <li class="page-item">
-                <a class="page-link" href="{{ list.router.pageRoute(list.pager.nextPage) }}" aria-label="{{ 'next_page'|trans({}, 'povs_lister') }}" class="js-povs-lister-ajax-trigger">
+                <a class="page-link js-povs-lister-ajax-trigger" href="{{ list.router.pageRoute(list.pager.nextPage) }}" aria-label="{{ 'next_page'|trans({}, 'povs_lister') }}">
                     {{ 'next_page'|trans({}, 'povs_lister') }}
                 </a>
             </li>
