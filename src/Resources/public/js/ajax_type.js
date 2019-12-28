@@ -15,7 +15,7 @@ ListerAjax = {
         let parentEl = document.querySelector(this.selectors.ajaxLister),
             self = this;
 
-        if (parentEl.length === 0) {
+        if (!parentEl) {
             return;
         }
 
