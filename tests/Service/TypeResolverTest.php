@@ -57,6 +57,9 @@ class TypeResolverTest extends TestCase
         $this->configurationResolver->expects($this->once())
             ->method('getTypeName')
             ->willReturn('type_name');
+        $this->configurationResolver->expects($this->once())
+            ->method('getResolvableTypes')
+            ->willReturn(['request_type']);
 
         $this->assertEquals('request_type', $this->getTypeResolver()->resolveType());
     }

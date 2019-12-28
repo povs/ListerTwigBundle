@@ -47,6 +47,25 @@ class ConfigurationResolverTest extends TestCase
     }
 
     /**
+     * @dataProvider getResolvableTypesProvider
+     *
+     * @param array $config
+     * @param array $expected
+     */
+    public function testGetResolvableTypes(array $config, array $expected): void
+    {
+        $this->assertEquals($expected, $this->getConfigurationResolver($config)->getResolvableTypes());
+    }
+
+    public function getResolvableTypesProvider(): array
+    {
+        return [
+            [['resolvable_types' => ['list']], ['list']],
+            [[], ['list', 'export']]
+        ];
+    }
+
+    /**
      * @dataProvider getTypeNameProvider
      *
      * @param array  $config

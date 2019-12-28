@@ -43,6 +43,14 @@ class ConfigurationResolver
     }
 
     /**
+     * @return array
+     */
+    public function getResolvableTypes(): array
+    {
+        return $this->configuration['resolvable_types'];
+    }
+
+    /**
      * @return string
      */
     public function getTypeName(): string

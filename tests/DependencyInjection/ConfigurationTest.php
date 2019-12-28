@@ -29,6 +29,7 @@ class ConfigurationTest extends TestCase
     {
         $defaultConfig = [
             'view_types' => ['list'],
+            'resolvable_types' => ['list', 'export'],
             'default_type' => 'list',
             'request' => ['type' => 'lister_type']
         ];
@@ -41,11 +42,13 @@ class ConfigurationTest extends TestCase
     {
         $customConfig = [
             'view_types' => ['list', 'another_list'],
+            'resolvable_types' => ['list'],
             'default_type' => 'another_list',
         ];
 
         $expectedConfig = [
             'view_types' => ['list', 'another_list'],
+            'resolvable_types' => ['list'],
             'default_type' => 'another_list',
             'request' => ['type' => 'lister_type']
         ];

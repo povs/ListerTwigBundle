@@ -36,7 +36,7 @@ class TypeResolver
         $typeRequestName = $this->configurationResolver->getTypeName();
         $type = $this->requestHandler->getRequest()->query->get($typeRequestName);
 
-        if (!$type) {
+        if (!$type || !in_array($type, $this->configurationResolver->getResolvableTypes(), true)) {
             $type = $this->configurationResolver->getDefaultType();
         }
 
