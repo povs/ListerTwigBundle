@@ -52,13 +52,15 @@
 
 {% block list_util %}
     {# @var list \Povs\ListerBundle\View\ListView #}
-    {% for type in list_data['export_types'] %}
-        {% if list_data['export_limit'][type] is not defined or list.pager.total <= list_data['export_limit'][type] %}
-            <a href="{{ list.router.generate({(list_data['type_name']): type}) }}" class="btn btn-primary" download>
-                {{ ('export_type.'~type)|trans([], 'povs_lister') }}
-            </a>
-        {% endif %}
-    {% endfor %}
+    {% if list_data['allow_export'] %}
+        {% for type in list_data['export_types'] %}
+            {% if list_data['export_limit'][type] is not defined or list.pager.total <= list_data['export_limit'][type] %}
+                <a href="{{ list.router.generate({(list_data['type_name']): type}) }}" class="btn btn-primary" download>
+                    {{ ('export_type.'~type)|trans([], 'povs_lister') }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 {% block list_pagination %}

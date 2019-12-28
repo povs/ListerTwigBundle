@@ -89,9 +89,10 @@ class TwigListType extends AbstractListType
      */
     public function configureSettings(OptionsResolver $optionsResolver): void
     {
-        $optionsResolver->setDefined(['theme', 'form_theme', 'default_length', 'length_options', 'export_types', 'export_limit']);
+        $optionsResolver->setDefined(['theme', 'form_theme', 'default_length', 'length_options', 'export_types', 'export_limit', 'allow_export']);
         $optionsResolver->setAllowedTypes('export_types', 'string[]');
         $optionsResolver->setAllowedTypes('export_limit', 'array');
+        $optionsResolver->setAllowedTypes('allow_export', 'bool');
         $optionsResolver->setAllowedTypes('default_length', 'int');
         $optionsResolver->setAllowedTypes('length_options', 'int[]');
         $optionsResolver->setDefaults([
@@ -99,7 +100,8 @@ class TwigListType extends AbstractListType
             'default_length' => 20,
             'length_options' => [20, 50, 100],
             'export_types' => [],
-            'export_limit' => []
+            'export_limit' => [],
+            'allow_export' => false
         ]);
     }
 
@@ -145,6 +147,7 @@ class TwigListType extends AbstractListType
                 'length_options' => $this->config['length_options'],
                 'export_types' => $this->config['export_types'],
                 'export_limit' => $this->config['export_limit'],
+                'allow_export' => $this->config['allow_export'],
                 'type_name' => $this->configurationResolver->getTypeName(),
                 'ajax' => false
             ]

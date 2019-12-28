@@ -117,7 +117,8 @@ class TwigListTypeTest extends TestCase
             'default_length' => 20,
             'length_options' => [20, 50, 100],
             'export_types' => [],
-            'export_limit' => []
+            'export_limit' => [],
+            'allow_export' => false
         ];
 
         $testCases = [
@@ -180,7 +181,8 @@ class TwigListTypeTest extends TestCase
             'length_options' => [20, 50, 100],
             'export_types' => ['test_type'],
             'type_name' => 'type',
-            'export_limit' => 1000
+            'export_limit' => 1000,
+            'allow_export' => true
         ];
         $listData = $config;
         $listData['ajax'] = false;

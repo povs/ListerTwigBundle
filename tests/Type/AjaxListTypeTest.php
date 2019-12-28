@@ -80,7 +80,8 @@ class AjaxListTypeTest extends TestCase
             'length_options' => [20, 50, 100],
             'export_types' => [],
             'export_limit' => [],
-            'block' => 'list_table'
+            'block' => 'list_table',
+            'allow_export' => false
         ];
 
         $testCases = [
@@ -115,7 +116,8 @@ class AjaxListTypeTest extends TestCase
             'export_types' => ['test_type'],
             'export_limit' => 1000,
             'type_name' => 'type',
-            'block' => 'list_table'
+            'block' => 'list_table',
+            'allow_export' => true
         ];
         $listData = $config;
         $listData['ajax'] = true;
