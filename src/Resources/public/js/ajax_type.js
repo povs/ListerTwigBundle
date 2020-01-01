@@ -33,6 +33,10 @@ ListerAjax = {
 
         //Updates table when filter form is submitted
         parentEl.addEventListener('submit', function(e) {
+            if (!self.isSupported()) {
+                return;
+            }
+
             e.preventDefault();
             let action = e.target.getAttribute('action'),
                 params = new URLSearchParams(new FormData(e.target)).toString();
@@ -131,6 +135,10 @@ ListerAjax = {
      */
     updateFilterForm: function(url, parentEl)
     {
+        if (!this.isSupported()) {
+            return;
+        }
+
         let searchParams = new URLSearchParams(url.substring(url.indexOf('?') + 1)),
             listerData = parentEl.querySelector(this.selectors.listerData),
             fields = listerData.getAttribute('data-fields').split(',');
@@ -150,5 +158,13 @@ ListerAjax = {
             input.setAttribute('value', value);
             listerData.appendChild(input);
         });
+    },
+
+    /**
+     * Returns whether URLSearchParams function is supported
+     */
+    isSupported: function()
+    {
+        return window.URLSearchParams && window.URLSearchParams.prototype.get;
     }
 };
