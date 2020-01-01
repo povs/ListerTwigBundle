@@ -37,9 +37,11 @@
 {% block list_header %}
     {# @var list \Povs\ListerBundle\View\ListView #}
     <thead>
-        {% for field in list.headerRow.fields %}
-            {{ list_view(field, 'list_header_field') }}
-        {% endfor %}
+        <tr>
+            {% for field in list.headerRow.fields %}
+                {{ list_view(field, 'list_header_field') }}
+            {% endfor %}
+        </tr>
     </thead>
 {% endblock %}
 
