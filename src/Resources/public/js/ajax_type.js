@@ -165,6 +165,9 @@ ListerAjax = {
      */
     isSupported: function()
     {
-        return window.URLSearchParams && window.URLSearchParams.prototype.get;
+        return window.URLSearchParams
+            && window.URLSearchParams.prototype.get
+            && window.FormData
+            && window.FormData.prototype.get;
     }
 };
