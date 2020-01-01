@@ -1,4 +1,7 @@
 ListerAjax = {
+    options: {
+        updateState: true
+    },
     selectors: {
         ajaxLister: '.js-povs-lister-ajax',
         trigger: 'js-povs-lister-ajax-trigger',
@@ -19,6 +22,8 @@ ListerAjax = {
             return;
         }
 
+        //Updates table when <a href=""> elements with class js-povs-lister-ajax-trigger are clicked.
+        //Such elements are: pagination, sorting, data length change
         parentEl.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains(self.selectors.trigger)) {
                 e.preventDefault();
@@ -26,6 +31,7 @@ ListerAjax = {
             }
         });
 
+        //Updates table when filter form is submitted
         parentEl.addEventListener('submit', function(e) {
             e.preventDefault();
             let action = e.target.getAttribute('action'),
@@ -33,8 +39,13 @@ ListerAjax = {
             self.refreshTable(action +'?'+ params, parentEl, true, false);
         });
 
-        window.onpopstate = function () {
-            self.refreshTable(location.href, parentEl, false, true);
+        //Updates table when user changes window state (browser navigation)
+        if (self.options.updateState) {
+            window.onpopstate = function (e) {
+                if (e.state) {
+                    parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = e.state.html;
+                }
+            }
         }
     },
 
@@ -43,10 +54,9 @@ ListerAjax = {
      *
      * @param url               url from where to fetch data (must return string html response)
      * @param parentEl          parentEl which content will be replaced with response
-     * @param pushState         whether to push new url
      * @param updateFilterForm  whether to update filter form values by url parameters
      */
-    refreshTable: function(url, parentEl, pushState, updateFilterForm)
+    refreshTable: function(url, parentEl, updateFilterForm)
     {
         if (this.loading) {
             return;
@@ -61,10 +71,11 @@ ListerAjax = {
 
         request.onload = function() {
             if (this.status >= 200 && this.status < 400) {
-                parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = JSON.parse(this.response);
+                let html = JSON.parse(this.response);
+                parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = html;
 
-                if (pushState) {
-                    window.history.pushState({}, "", url);
+                if (self.options.updateState) {
+                    window.history.pushState({'html': html}, "", url);
                 }
 
                 if (updateFilterForm) {
