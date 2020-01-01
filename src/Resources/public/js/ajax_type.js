@@ -111,8 +111,15 @@ ListerAjax = {
      */
     triggerEvent: function(event, el, data)
     {
-        event = data ? new CustomEvent(event, {'detail': data}) : new Event(event);
-        el.dispatchEvent(event);
+        let e = document.createEvent('CustomEvent');
+
+        if (data) {
+            e.initCustomEvent(event, false, false, data);
+        } else {
+            e.initEvent(event, false, false);
+        }
+
+        el.dispatchEvent(e);
     },
 
     /**
