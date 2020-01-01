@@ -27,7 +27,7 @@ ListerAjax = {
         parentEl.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains(self.selectors.trigger)) {
                 e.preventDefault();
-                self.refreshTable(e.target.getAttribute('href'), parentEl, true, true);
+                self.refreshTable(e.target.getAttribute('href'), parentEl, true);
             }
         });
 
@@ -36,7 +36,8 @@ ListerAjax = {
             e.preventDefault();
             let action = e.target.getAttribute('action'),
                 params = new URLSearchParams(new FormData(e.target)).toString();
-            self.refreshTable(action +'?'+ params, parentEl, true, false);
+
+            self.refreshTable(action +'?'+ params, parentEl, false);
         });
 
         //Updates table when user changes window state (browser navigation)
@@ -140,7 +141,7 @@ ListerAjax = {
             let input = document.createElement('input'),
                 name = key.split('[')[0];
 
-            if (!fields.includes(name)) {
+            if (fields.indexOf(name) === -1) {
                 return;
             }
 
