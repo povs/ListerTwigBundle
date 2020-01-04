@@ -1,8 +1,8 @@
 <?php
-namespace Povs\ListerTwigBundle\Definition;
+namespace Povs\ListerTwigBundle\Declaration;
 
 use Symfony\Component\HttpFoundation\Response;
-use \Povs\ListerBundle\Definition\ListerInterface;
+use Povs\ListerBundle\Declaration\ListerInterface;
 
 /**
  * @author Povilas Margaiatis <p.margaitis@gmail.com>

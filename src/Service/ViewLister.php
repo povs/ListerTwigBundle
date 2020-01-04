@@ -1,9 +1,9 @@
 <?php
 namespace Povs\ListerTwigBundle\Service;
 
-use Povs\ListerBundle\Definition\ListerInterface;
+use Povs\ListerBundle\Declaration\ListerInterface;
 use Povs\ListerBundle\Service\ListManager;
-use Povs\ListerTwigBundle\Definition\ViewListerInterface;
+use Povs\ListerTwigBundle\Declaration\ViewListerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use \Povs\ListerBundle\Service\Lister;
 
