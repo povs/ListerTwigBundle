@@ -15,7 +15,7 @@ ListerAjax = {
      */
     init: function()
     {
-        let parentEl = document.querySelector(this.selectors.ajaxLister),
+        var parentEl = document.querySelector(this.selectors.ajaxLister),
             self = this;
 
         if (!parentEl) {
@@ -38,7 +38,7 @@ ListerAjax = {
             }
 
             e.preventDefault();
-            let action = e.target.getAttribute('action'),
+            var action = e.target.getAttribute('action'),
                 params = new URLSearchParams(new FormData(e.target)).toString();
 
             self.refreshTable(action +'?'+ params, parentEl, false);
@@ -69,14 +69,14 @@ ListerAjax = {
 
         this.loading = true;
         this.triggerEvent('povs_lister_ajax_pre_update', parentEl);
-        let request = new XMLHttpRequest(),
+        var request = new XMLHttpRequest(),
             self = this;
         request.open('GET', url, true);
         request.setRequestHeader('Ajax-Request', '1');
 
         request.onload = function() {
             if (this.status >= 200 && this.status < 400) {
-                let html = JSON.parse(this.response);
+                var html = JSON.parse(this.response);
                 parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = html;
 
                 if (self.options.updateState) {
@@ -116,7 +116,7 @@ ListerAjax = {
      */
     triggerEvent: function(event, el, data)
     {
-        let e = document.createEvent('CustomEvent');
+        var e = document.createEvent('CustomEvent');
 
         if (data) {
             e.initCustomEvent(event, false, false, data);
@@ -139,14 +139,14 @@ ListerAjax = {
             return;
         }
 
-        let searchParams = new URLSearchParams(url.substring(url.indexOf('?') + 1)),
+        var searchParams = new URLSearchParams(url.substring(url.indexOf('?') + 1)),
             listerData = parentEl.querySelector(this.selectors.listerData),
             fields = listerData.getAttribute('data-fields').split(',');
 
         listerData.innerHTML = '';
 
         searchParams.forEach(function(value, key) {
-            let input = document.createElement('input'),
+            var input = document.createElement('input'),
                 name = key.split('[')[0];
 
             if (fields.indexOf(name) === -1) {
