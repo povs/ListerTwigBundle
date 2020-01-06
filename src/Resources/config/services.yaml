@@ -1,5 +1,5 @@
 services:
-    Povs\ListerTwigBundle\Definition\ViewListerInterface:
+    Povs\ListerTwigBundle\Declaration\ViewListerInterface:
         alias: 'povs.view_lister'
         public: true
 
