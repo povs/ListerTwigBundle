@@ -4,9 +4,13 @@
         <div>
             {{ list_view(list, 'list_filter') }}
         </div>
-        <div {% if list_data['ajax'] %}class="js-povs-lister-ajax-update"{% endif %}>
-            {{ list_view(list, 'list_table') }}
-        </div>
+        {% if list_data['ajax'] %}
+            <div {% if list_data['ajax'] %}class="js-povs-lister-ajax-update"{% endif %}></div>
+        {% else %}
+            <div>
+                {{ list_view(list, 'list_table') }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
