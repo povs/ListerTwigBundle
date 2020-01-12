@@ -15,6 +15,8 @@ use Twig\Environment;
  */
 class AjaxListType extends TwigListType
 {
+    private const HEADER_AJAX_REQUEST = 'ajax-request';
+
     /**
      * @var RequestHandler
      */
@@ -44,9 +46,9 @@ class AjaxListType extends TwigListType
     public function generateResponse(ListView $listView, array $options): Response
     {
         $view = $this->getView($listView, $options);
-        $response = $this->isAjaxRequest() ? new JsonResponse($view) : new Response($view);
+        $params = [$view, 200, ['Vary' => self::HEADER_AJAX_REQUEST]];
 
-        return $response;
+        return $this->isAjaxRequest() ? new JsonResponse(...$params) : new Response(...$params);
     }
 
     /**
@@ -91,6 +93,6 @@ class AjaxListType extends TwigListType
      */
     protected function isAjaxRequest(): bool
     {
-        return $this->requestHandler->getRequest()->headers->has('ajax-request');
+        return $this->requestHandler->getRequest()->headers->has(self::HEADER_AJAX_REQUEST);
     }
 }

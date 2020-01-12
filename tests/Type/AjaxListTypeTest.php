@@ -44,6 +44,7 @@ class AjaxListTypeTest extends TestCase
         $res = $type->generateResponse($listViewMock, $options);
         $this->assertNotInstanceOf(JsonResponse::class, $res);
         $this->assertEquals('baseViewContent', $res->getContent());
+        $this->assertEquals('ajax-request', $res->headers->get('Vary'));
     }
 
     public function testGenerateResponseAjax(): void
@@ -57,6 +58,8 @@ class AjaxListTypeTest extends TestCase
         $res = $type->generateResponse($listViewMock, $options);
         $this->assertInstanceOf(JsonResponse::class, $res);
         $this->assertEquals('"ajaxViewContent"', $res->getContent());
+        $this->assertEquals('ajax-request', $res->headers->get('Vary'));
+        $this->assertEquals('application/json', $res->headers->get('Content-Type'));
     }
 
     /**

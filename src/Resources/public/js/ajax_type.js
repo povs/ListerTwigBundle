@@ -50,8 +50,8 @@ ListerAjax = {
         //Updates table when user changes window state (browser navigation)
         if (self.options.updateState) {
             window.onpopstate = function (e) {
-                if (e.state && e.state.listHtml) {
-                    parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = e.state.listHtml;
+                if (e.state) {
+                    parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = e.state.html;
                 }
             }
         }
@@ -83,7 +83,7 @@ ListerAjax = {
                 parentEl.querySelector(self.selectors.dynamicContainer).innerHTML = html;
 
                 if (self.options.updateState) {
-                    self.pushState(html, url);
+                    window.history.pushState({'html': html}, "", url);
                 }
 
                 if (updateFilterForm) {
@@ -161,27 +161,6 @@ ListerAjax = {
             input.setAttribute('value', value);
             listerData.appendChild(input);
         });
-    },
-
-    /**
-     * Updates browser history state with current list html
-     *
-     * @param html
-     * @param url
-     */
-    pushState: function(html, url)
-    {
-        var htmlTag = document.querySelector('html'),
-            titleTag = document.querySelector('title'),
-            contentHtml = htmlTag ? htmlTag.outerHTML : null,
-            titleString = titleTag ? titleTag.text : '',
-            stateData = {'listHtml': html};
-
-        if (contentHtml) {
-            stateData.html = contentHtml;
-        }
-
-        window.history.pushState(stateData, titleString, url);
     },
 
     /**
