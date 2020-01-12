@@ -23,7 +23,7 @@ ListerAjax = {
         }
 
         //Loads table on initial page load
-        self.refreshTable(window.location, parentEl, false);
+        self.refreshTable(window.location.href, parentEl, false);
 
         //Updates table when <a href=""> elements with class js-povs-lister-ajax-trigger are clicked.
         //Such elements are: pagination, sorting, data length change
