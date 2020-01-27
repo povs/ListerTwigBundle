@@ -1,4 +1,5 @@
 <?php
+
 namespace Povs\ListerTwigBundle\Type\ListType;
 
 use Povs\ListerBundle\Type\ListType\AbstractListType;

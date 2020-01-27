@@ -1,4 +1,5 @@
 <?php
+
 namespace Povs\ListerTwigBundle\Type;
 
 use PHPUnit\Framework\MockObject\MockObject;

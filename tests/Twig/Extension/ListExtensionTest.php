@@ -1,4 +1,5 @@
 <?php
+
 namespace Povs\ListerTwigBundle\Twig\Extension;
 
 use PHPUnit\Framework\TestCase;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Povs\ListerTwigBundle\Declaration;
 
 use Symfony\Component\HttpFoundation\Response;

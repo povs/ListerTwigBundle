@@ -1,4 +1,5 @@
 <?php
+
 namespace Povs\ListerTwigBundle\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;

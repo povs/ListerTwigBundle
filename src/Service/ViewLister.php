@@ -1,11 +1,12 @@
 <?php
+
 namespace Povs\ListerTwigBundle\Service;
 
 use Povs\ListerBundle\Declaration\ListerInterface;
 use Povs\ListerBundle\Service\ListManager;
 use Povs\ListerTwigBundle\Declaration\ViewListerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use \Povs\ListerBundle\Service\Lister;
+use Povs\ListerBundle\Service\Lister;
 
 /**
  * @author Povilas Margaiatis <p.margaitis@gmail.com>
