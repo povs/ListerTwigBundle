@@ -11,6 +11,15 @@ use Povs\ListerBundle\Declaration\ListerInterface;
 interface ViewListerInterface extends ListerInterface
 {
     /**
+     * @param string      $list
+     * @param string|null $type
+     * @param array       $parameters
+     *
+     * @return ListerInterface
+     */
+    public function buildList(string $list, string $type = null, array $parameters = []): ListerInterface;
+
+    /**
      * To overwrite view options or set options for other types. i.e export
      *
      * @param string $type    type name
