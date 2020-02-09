@@ -1,7 +1,7 @@
 # ListerTwigBundle
 
 > This documentation covers only ListerTwigBundle functionality assuming that you're already familiar with how ListerBundle works.
-> If no, please read [ListerBundle documentation]() first
+> If no, please read [ListerBundle documentation](https://povs.github.io/ListerBundle) first
 
 ListerTwigBundle is an extension for [ListerBundle](https://github.com/povs/ListerBundle) for full stack web applications using twig as template engine.
 
