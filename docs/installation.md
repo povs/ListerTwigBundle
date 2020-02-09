@@ -7,7 +7,10 @@ Requirements:
 - Twig
 
 Install package via `composer`:
->Package is not yet available via composer.
+
+```
+composer require povs/lister-twig-bundle @dev
+```
 
 Register bundle in your `bundles.php` file
 
