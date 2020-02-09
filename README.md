@@ -1,9 +1,9 @@
 # Lister Bundle
 
-[![Scrutinizer Build Status](https://img.shields.io/scrutinizer/build/g/povs/ListerBundle/master?label=scrutinizer-ci)](https://scrutinizer-ci.com/g/povs/ListerBundle/build-status/master)
-[![Travis Build Status](https://img.shields.io/travis/povs/ListerBundle/master?label=travis-ci)](https://travis-ci.com/povs/ListerBundle)
-[![Code Coverage](https://scrutinizer-ci.com/g/povs/ListerBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/povs/ListerBundle/?branch=master)
-[![Code Quality](https://img.shields.io/scrutinizer/quality/g/povs/ListerBundle/master)](https://scrutinizer-ci.com/g/povs/ListerBundle/?branch=master)
+[![Scrutinizer Build Status](https://img.shields.io/scrutinizer/build/g/povs/ListerTwigBundle/master?label=scrutinizer-ci)](https://scrutinizer-ci.com/g/povs/ListerBundle/build-status/master)
+[![Travis Build Status](https://img.shields.io/travis/povs/ListerTwigBundle/master?label=travis-ci)](https://travis-ci.com/povs/ListerBundle)
+[![Code Coverage](https://scrutinizer-ci.com/g/povs/ListerTwigBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/povs/ListerBundle/?branch=master)
+[![Code Quality](https://img.shields.io/scrutinizer/quality/g/povs/ListerTwigBundle/master)](https://scrutinizer-ci.com/g/povs/ListerBundle/?branch=master)
 
 ### [Documentation]()
 

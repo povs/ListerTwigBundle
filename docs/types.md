@@ -1,4 +1,4 @@
-#Types
+# Types
 
 ListerTwigBundle comes with two types
 
@@ -47,12 +47,16 @@ allow_export | bool | false | Whether to allow export.
 block | string | list_table | block name to refresh via ajax
 
 *available options*:
-Options are same as `wwig list type`
 
-#### Javascript plugin
+Name | type | default | description
+--- | --- | --- | ---
+template | string | null | twig template name
+context | array | [] | array of parameters that will be passed to template
 
-To use ajax list type you will need some javascript. 
-ListerTwigBundle comes with simple javascript object that covers all the logic needed to use lister with ajax.
+#### Javascript
+
+> To use ajax list type you will need some javascript. 
+> ListerTwigBundle comes with simple javascript object that covers all the logic needed to use lister with ajax.
 
 To use it you will need to include it in your twig or add it to your assets build system.
 
@@ -77,19 +81,18 @@ povs_lister_ajax_pre_update | | called before update
 povs_lister_ajax_post_update | response, url | called after update with response and request url.
 povs_lister_ajax_error | | called when error have occurred.
 
-```` javascript
+```javascript
 let element = document.querySelector('.js-povs-lister-ajax');
 
 element.addEventListener('povs_lister_ajax_pre_update', function() {
-    addLoader();
+    addLoader(); //Adds some loader
 });
 
 element.addEventListener('povs_lister_ajax_post_update', function() {
-    hideLoader();
+    hideLoader(); //Hides loader after table has loaded
 });
 
 element.addEventListener('povs_lister_ajax_error', function() {
-    showError();
+    showError(); //Informs user about an error
 });
-)
-````
+```

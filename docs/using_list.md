@@ -19,9 +19,6 @@ Methods:
    - If you have built your own type and it requires other options than default ones, you can set it via this method. Where:
      - `$type` fully qualified list class name
      - `$options` array of options
-   
-This interface extends default `ListerInterface` so all methods that are available via it are also available with `ViewListerInterface`
-Such as `generateResponse`, `generateData`. You can read about those in `ListerBunde` documentation.
 
 Example usage:
 
@@ -52,7 +49,7 @@ class MyListController extends AbstractController
 ````
 
 
-## Rendering table
+## Rendering list
 
 All templates generated with `ViewListerInterface` receives `view` object called `list`.
 
