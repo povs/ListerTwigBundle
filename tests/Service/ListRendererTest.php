@@ -2,11 +2,12 @@
 
 namespace Povs\ListerTwigBundle\Service;
 
+use DG\BypassFinals;
 use PHPUnit\Framework\TestCase;
 use Povs\ListerBundle\View\FieldView;
 use Povs\ListerBundle\View\ViewInterface;
 use Twig\Environment;
-use Twig\Template;
+use Twig\TemplateWrapper;
 
 /**
  * @author Povilas Margaiatis <p.margaitis@gmail.com>
@@ -27,9 +28,10 @@ class ListRendererTest extends TestCase
 
     public function setUp()
     {
+        BypassFinals::enable();
         $this->twigMock = $this->createMock(Environment::class);
-        $this->themeTemplateMock = $this->createMock(Template::class);
-        $this->listTemplateMock = $this->createMock(Template::class);
+        $this->themeTemplateMock = $this->createMock(TemplateWrapper::class);
+        $this->listTemplateMock = $this->createMock(TemplateWrapper::class);
         $this->viewMock = $this->createMock(ViewInterface::class);
     }
 
