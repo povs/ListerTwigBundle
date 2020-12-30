@@ -42,7 +42,7 @@ ListerAjax = {
 
             e.preventDefault();
             var action = e.target.getAttribute('action'),
-                params = new URLSearchParams(new FormData(e.target)).toString();
+                params = new URLSearchParams(Array.from(new FormData(e.target))).toString();
 
             self.refreshTable(action +'?'+ params, parentEl, false);
         });
