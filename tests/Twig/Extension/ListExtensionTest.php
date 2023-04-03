@@ -15,7 +15,7 @@ class ListExtensionTest extends TestCase
 {
     private $renderer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->renderer = $this->createMock(ListRenderer::class);
     }

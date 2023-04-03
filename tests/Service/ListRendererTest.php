@@ -26,7 +26,7 @@ class ListRendererTest extends TestCase
     private $listTemplateMock;
     private $viewMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         BypassFinals::enable();
         $this->twigMock = $this->createMock(Environment::class);

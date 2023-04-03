@@ -15,7 +15,7 @@ class TypeResolverTest extends TestCase
     private $requestHandler;
     private $configurationResolver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->requestHandler = $this->createMock(RequestHandler::class);
         $this->configurationResolver = $this->createMock(ConfigurationResolver::class);
