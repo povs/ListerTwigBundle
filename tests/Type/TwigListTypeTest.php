@@ -20,7 +20,7 @@ class TwigListTypeTest extends TestCase
     private $rendererMock;
     private $configurationResolverMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->twigMock = $this->createMock(Environment::class);
         $this->rendererMock = $this->createMock(ListRenderer::class);

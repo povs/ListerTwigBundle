@@ -14,7 +14,7 @@ class ViewListerTest extends TestCase
     private $listManagerMock;
     private $typeResolverMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->listManagerMock = $this->createMock(ListManager::class);
         $this->typeResolverMock = $this->createMock(TypeResolver::class);

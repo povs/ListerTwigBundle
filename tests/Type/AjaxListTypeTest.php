@@ -26,7 +26,7 @@ class AjaxListTypeTest extends TestCase
     private $configurationResolverMock;
     private $requestHandlerMock;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->twigMock = $this->createMock(Environment::class);
         $this->rendererMock = $this->createMock(ListRenderer::class);
